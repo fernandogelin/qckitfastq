@@ -7,7 +7,7 @@
 src/*.o
 src/*.so
 src/*.dll
-docs
+docs/*.md
 figure
 vignettes/*.csv
 .RStore
