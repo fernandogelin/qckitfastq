@@ -1,5 +1,3 @@
-devtools::install_github("Rd2md")
-
 library("Rd2md")
 library("knitr")
 

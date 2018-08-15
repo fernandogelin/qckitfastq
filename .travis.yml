@@ -13,12 +13,11 @@ matrix:
         - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
         - source activate test-env
         - pip install mkdocs mkdocs-material
-        - conda install r r-knitr
-        - conda install -c asmeurer r-devtools
+        - conda install r-knitr
+        - R -e 'install.packages("Rd2md", repos="http://cran.us.r-project.org")'
       before_script:
         - source activate test-env
       script:
-        - Rscript --version
         - Rscript docs/make.R
         - mkdir docs/styles
         - curl https://gist.githubusercontent.com/fernandogelin/08ecff3387dffc374c4abf06a577ab71/raw/29ad95fcc771ce49ff6cecc56346218a0e929df8/dark_mode.css > docs/styles/dark_mode.css
