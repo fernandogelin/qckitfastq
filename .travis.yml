@@ -14,6 +14,7 @@ matrix:
         - source activate test-env
         - pip install mkdocs mkdocs-material
         - conda install r-devtools r-knitr
+        - pwd
         - Rscript docs/make.R
       script:
         - mkdir docs/styles
