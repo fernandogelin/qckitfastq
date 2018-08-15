@@ -13,7 +13,7 @@ matrix:
         - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
         - source activate test-env
         - pip install mkdocs mkdocs-material
-        - conda install r-knitr
+        - conda install r-knitr r-devtools
         - R -e 'install.packages("Rd2md", repos="http://cran.us.r-project.org")'
       before_script:
         - source activate test-env
