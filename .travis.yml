@@ -1,4 +1,5 @@
-matrix: #allows to set up tests/deploys in different languages/environments.
+matrix:
+  include: #allows to set up tests/deploys in different languages/environments.
     - stage: test
       language: julia
       julia:
