@@ -29,4 +29,4 @@ for (f in figures){
 }
 
 file_rename(from = file.path("README.md"),
-            to = file.path("docs", "README.md"))
+            to = file.path("docs", "index.md"))

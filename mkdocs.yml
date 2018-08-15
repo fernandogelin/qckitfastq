@@ -21,7 +21,7 @@ markdown_extensions:
 docs_dir: docs/
 
 pages:
-  - Home: README.md
+  - Home: index.md
   - Manual: vignette-qckitfastq.md
   - Reference:
     - Basic Stat: basic_stat.md
