@@ -15,7 +15,8 @@ matrix:
         - pip install mkdocs==0.17.5 mkdocs-material==2.9.4
         - conda install r-knitr r-devtools
         - R -e 'install.packages("Rd2md", repos="http://cran.us.r-project.org")'
-        - R -e 'library(devtools); install_github("fernandogelin/qckitfastq")'
+      r_github_packages:
+        - fernandogelin/qckitfastq
       before_script:
         - source activate test-env
       script:
