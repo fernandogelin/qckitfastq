@@ -13,10 +13,10 @@ matrix:
         - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
         - source activate test-env
         - pip install mkdocs mkdocs-material
-        - conda install r-devtools r-knitr
+        - conda install r r-devtools r-knitr
       script:
         - source activate test-env
-        - Rscript docs/make.R
+        - R CMD BATCH docs/make.R
         - mkdir docs/styles
         - curl https://gist.githubusercontent.com/fernandogelin/08ecff3387dffc374c4abf06a577ab71/raw/29ad95fcc771ce49ff6cecc56346218a0e929df8/dark_mode.css > docs/styles/dark_mode.css
         - mkdocs build --verbose --clean --strict
