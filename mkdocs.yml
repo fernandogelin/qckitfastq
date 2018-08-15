@@ -1,8 +1,8 @@
 site_name:        QCKitFastQ
 site_author:      August Guang
-repo_url:         https://github.com/compbiocore/qckitfatq
+repo_url:         https://github.com/fernandogelin/qckitfatq
 site_description: QCKitFastQ
-site_url: https://compbiocore.github.io/qckitfatq
+site_url: https://fernandogelin.github.io/qckitfatq
 
 theme:
   name: material
