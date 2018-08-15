@@ -16,7 +16,7 @@ matrix:
         - conda install r-knitr r-devtools
         - R -e 'remove.packages(c("curl","httr")); install.packages(c("curl", "httr"), repos="http://cran.us.r-project.org"); Sys.setenv(CURL_CA_BUNDLE="/utils/microsoft-r-open-3.5.0/lib64/R/lib/microsoft-r-cacert.pem") '
         - R -e 'install.packages("Rd2md", repos="http://cran.us.r-project.org")'
-        - R -e 'library(devtools); install_github("compbiocore/qckitfastq",build_vignettes=TRUE)'
+        - R -e 'source("https://bioconductor.org/biocLite.R"); biocLite("BiocInstaller"); library(devtools); install_github("compbiocore/qckitfastq",build_vignettes=TRUE)'
       before_script:
         - source activate test-env
       script:
