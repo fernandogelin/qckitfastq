@@ -1,0 +1,179 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "qckitfastq: The comprehensive quality control tool for Next Generation Sequencing data in FASTQC format\n\n\nThis package contains tools for the comprehensive quality control of FASTQC format data. In this package, we hope to replicate exsting tool FASTQC metrices where analysis on entire dataset is operated. We also aim to advance FASTQC metrices where data is truncated for the analysis. \n\n\nWe enable efficient processing of FASTQ format data by implementing efficient c++ functions using \nRcpp\n. \n\n\nThe metrices that \nqckitfastq\n provides are as following:\n1. data dimension\n2. per base sequence content\n3. per base quality score statisitcs\n4. per read GC content\n5. per read mean quality score\n6. overrepresented sequence\n7. per base kmer count\n8. overrepresented kmer\n\n\nThe above metrices include both analysis results tables and visualizations of results. \n\n\nExisting Tools\n\n\nFASTQC\n\n\nseqTools\n\n\nShortRead\n\n\nInstallation\n\n\nInstallation from Github repo\n\n\ndevtools\n::\ninstall_github\n(\ncompbiocore/qckitfastq\n,\nbuild_vignettes\n=\nTRUE\n)\n\n\nlibrary\n(\nqckitfastq\n)\n\n\n\n\n\n\nInstallation from Bioconductor(add later)\n\n\nGetting started\n\n\nYou can explore how the package analyze a FASTQ format sequencing data. \n\n\nlibrary\n(\nqckitfastq\n)\n\nbrowseVignettes\n(\nqckitfastq\n)", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#qckitfastq-the-comprehensive-quality-control-tool-for-next-generation-sequencing-data-in-fastqc-format", 
+            "text": "This package contains tools for the comprehensive quality control of FASTQC format data. In this package, we hope to replicate exsting tool FASTQC metrices where analysis on entire dataset is operated. We also aim to advance FASTQC metrices where data is truncated for the analysis.   We enable efficient processing of FASTQ format data by implementing efficient c++ functions using  Rcpp .   The metrices that  qckitfastq  provides are as following:\n1. data dimension\n2. per base sequence content\n3. per base quality score statisitcs\n4. per read GC content\n5. per read mean quality score\n6. overrepresented sequence\n7. per base kmer count\n8. overrepresented kmer  The above metrices include both analysis results tables and visualizations of results.", 
+            "title": "qckitfastq: The comprehensive quality control tool for Next Generation Sequencing data in FASTQC format"
+        }, 
+        {
+            "location": "/#existing-tools", 
+            "text": "", 
+            "title": "Existing Tools"
+        }, 
+        {
+            "location": "/#fastqc", 
+            "text": "", 
+            "title": "FASTQC"
+        }, 
+        {
+            "location": "/#seqtools", 
+            "text": "", 
+            "title": "seqTools"
+        }, 
+        {
+            "location": "/#shortread", 
+            "text": "", 
+            "title": "ShortRead"
+        }, 
+        {
+            "location": "/#installation", 
+            "text": "", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/#installation-from-github-repo", 
+            "text": "devtools :: install_github ( compbiocore/qckitfastq , build_vignettes = TRUE )  library ( qckitfastq )", 
+            "title": "Installation from Github repo"
+        }, 
+        {
+            "location": "/#installation-from-bioconductoradd-later", 
+            "text": "", 
+            "title": "Installation from Bioconductor(add later)"
+        }, 
+        {
+            "location": "/#getting-started", 
+            "text": "You can explore how the package analyze a FASTQ format sequencing data.   library ( qckitfastq ) \nbrowseVignettes ( qckitfastq )", 
+            "title": "Getting started"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/", 
+            "text": "%\\VignetteIndexEntry{quality control analysis and visualization using qckitfastq }\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n\n\n\n\nI. Pre-processing of FASTQ files\n\n\nWe first install the package from github by using \ndevtools\n\n\nThen we specify the path to the FASTQ file and run analysis and visualization functions on it. \nHere, for example, we use a system file with 25,000 reads as an example. \n\n\nlibrary\n(\nqckitfastq\n)\n\ninfile \n-\n \nsystem.file\n(\nextdata\n,\n \n10^5_reads_test.fq.gz\n,\n package \n=\n \nqckitfastq\n)\n\n\n\n\n\n\nTo open FASTQ files, we can replace the infile argument with path to the FASTQ file. \n\n\n#infile \n- \nData/10^5_reads_test.fq.gz\n\n\n\n\n\n\nFor some functions based on \nseqTools\n, we will first process the file through seqTools and then let qckitfastq functions proceed with the analysis. \n\n\nfseq \n-\n seqTools\n::\nfastqq\n(\ninfile\n)\n\n\n\n\n\n\n## [fastqq] File ( 1/1) \n/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz\n   done.\n\n\n\n\n\nII. Metrics of FASTQ quality control\n\n\n1. data dimension\n\n\ndimensions\n function obtains the number of reads and number of positions from a \nseqTools\n processed FASTQ file. The sample file has 25,000 reads and 100 positions. This section allows us to examine whether the sequence length are uniform throughout the entire file. The results from this section can also help with further analysis like \noverrepresented_kmer\n, where dimensionality of data is important for calculation. \n\n\nnc \n-\n dimensions\n(\nfseq\n,\npositions\n)\n\nnc\n\n\n\n\n\n## [1] 100\n\n\n\n\n\nnr \n-\n dimensions\n(\nfseq\n,\nreads\n)\n\nnr\n\n\n\n\n\n## [1] 25000\n\n\n\n\n\nplot_sequence_length\n function generates distribution plot of the length of all reads. The generated plot would show the sequence length of all the sequences throughout the file. The plot is considered an indication of good data quality is all sequences have the same sequence length with no deviations. The following plot shows that all reads in the file have sequence length of 100. \n\n\nplot_sequence_length\n(\nfseq\n,\nwritefile\n=\nFALSE\n)\n\n\n\n\n\n\n\n\n2.  per base quality score statistics\n\n\nbasic_statistics\n function calculates the quality score per sequence statistics including mean, median and quantiles. We will use the result to create a quality score distribution per position plot to present the overall dispersion and concentration of quality score per position of the FASTQ file.   \n\n\nbs \n-\n basic_stat\n(\ninfile\n,\nFALSE\n)\n\nknitr\n::\nkable\n(\nhead\n(\nbs\n))\n\n\n\n\n\n\n\n\n\n\n\n\nq01\n\n\nq25\n\n\nmedian\n\n\nq75\n\n\nq99\n\n\n\n\n\n\n\n\n\n\n2\n\n\n32\n\n\n32\n\n\n32\n\n\n32\n\n\n\n\n\n\n12\n\n\n32\n\n\n32\n\n\n32\n\n\n32\n\n\n\n\n\n\n27\n\n\n37\n\n\n37\n\n\n37\n\n\n37\n\n\n\n\n\n\n27\n\n\n37\n\n\n37\n\n\n37\n\n\n37\n\n\n\n\n\n\n27\n\n\n37\n\n\n37\n\n\n37\n\n\n37\n\n\n\n\n\n\n27\n\n\n41\n\n\n41\n\n\n41\n\n\n41\n\n\n\n\n\n\n\n\nplot_quality_score\n(\nbs\n,\nwritefile\n=\nFALSE\n)\n\n\n\n\n\n\n\n\nplot_quality_score\n function generates boxplot of quality score distribution per base.In this section, we would like to examine whether certain portion of the sequences have generally low quality score. If a subset of seqences have quality score generally small(\n30) \n\n\n3. nucleotide sequence content\n\n\nsequence_content\n calculates the total number of each nucleotide sequence content per sequence throughout the file. \n\n\nscA \n-\n sequence_content\n(\nfseq\n,\n content \n=\n \nA\n,\nwritefile\n=\nFALSE\n)\n\nscA\n\n\n\n\n\n##   [1] 4351 5341 5995 6262 6624 6689 6689 6637 5974 6183 6569 7783 6789 6164\n##  [15] 6376 6889 6823 6757 7034 7088 7417 6927 6581 7127 6573 6982 6709 6892\n##  [29] 6791 7285 7265 6893 7267 7493 6949 6875 6731 6506 7256 7523 7849 7482\n##  [43] 7341 6960 7460 7543 7214 6863 6693 6785 7275 7677 7336 7381 7891 7620\n##  [57] 7692 7180 7501 6997 7368 7245 7679 7747 7651 7511 7133 7097 7606 7816\n##  [71] 7757 7482 7679 7317 7805 7492 7281 7067 7204 7245 6940 7199 7639 7607\n##  [85] 7945 7660 7274 7624 7398 7333 7885 7767 7407 8121 7647 7807 7778 7692\n##  [99] 7627 8136\n\n\n\n\n\nplot_sequence_conent\n use the \nsequence_content\n function and plot the percentage of all nucleotide sequence content per position. The plot would be considered an indication of good data quality when the percentage of each nucleotide sequence content is not significantly larger than other nucleotide sequence contents. In this section, we examine whether each nucleotide sequence content are distributed evenly at all bases. The data is problematic if any sequence bias greatly from other sequence content in any subset of sequences. \n\n\nplot_sequence_content\n(\nfseq\n,\nnr\n,\nnc\n)\n\n\n\n\n\n\n## No id variables; using all as measure variables\n\n\n\n\n\n\n\n4. GC content\n\n\nFunction \nGC_content\n utilizes the result from the C++_calling function \nGC_per_read\n and produce the data frame that is more suitable for the plotting purpose as well as for saving to data file for later access. The result is the GC content percentage per read and will be saved in resulting table. \n\n\ngc_df \n-\n GC_content\n(\ninfile\n)\n\n\nknitr\n::\nkable\n(\nhead\n(\ngc_df\n))\n\n\n\n\n\n\n\n\n\n\n\n\nmeanGC\n\n\n\n\n\n\n\n\n\n\n43\n\n\n\n\n\n\n37\n\n\n\n\n\n\n39\n\n\n\n\n\n\n40\n\n\n\n\n\n\n42\n\n\n\n\n\n\n38\n\n\n\n\n\n\n\n\nThe \nplot_GC_content_plot\n function takes the input from previous function and generates plot of distribution of GC nucleotide sequence content percentage. The graph would be an indication of good data quality when the  GC percentage concentrated around 30 to 50 and the results do not differ among different bases. \n\n\nplot_GC_content\n(\nnc\n,\ngc_df\n)\n\n\n\n\n\n\n\n\n5. Per read sequence quality score\n\n\nplot_perseq_quality\n function extracts the mean quality score per read and generate a histogram of this statistics.It takes the input of the path to the gzipped FASTQ files. It also enables plot saving if set \nwritefile\n to TRUE and input a \nprefix\n value to customize name of saved file. The histogram would be considered an indication of good data quality when the majority of reads have high quality score(around 30). If a significant portion of read are with low quality score, say less than 20, then data is problematic. \n\n\nplot_perseq_quality\n(\ninfile\n,\nwritefile\n=\nFALSE\n)\n\n\n\n\n\n\n\n\n6. Kmers count per base\n\n\nkmer_count\n function produces the per position kmer count with given path to the FASTQ file and the kmer length specified. \n\n\nkm \n-\n Kmer_count\n(\ninfile\n,\nk\n=\n6\n)\n\n\n\n\n\n\n## [fastq_Klocs] File ( 1/1) \n/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz\n  done.\n\n\n\n\n\nknitr\n::\nkable\n(\nkm\n[\n1\n:\n20\n,\n1\n:\n10\n])\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1\n\n\n2\n\n\n3\n\n\n4\n\n\n5\n\n\n6\n\n\n7\n\n\n8\n\n\n9\n\n\n10\n\n\n\n\n\n\n\n\n\n\nAAAAAA\n\n\n14\n\n\n9\n\n\n44\n\n\n18\n\n\n33\n\n\n42\n\n\n69\n\n\n163\n\n\n41\n\n\n34\n\n\n\n\n\n\nAAAAAC\n\n\n8\n\n\n4\n\n\n1\n\n\n24\n\n\n2\n\n\n9\n\n\n21\n\n\n14\n\n\n142\n\n\n5\n\n\n\n\n\n\nAAAAAG\n\n\n2\n\n\n2\n\n\n0\n\n\n3\n\n\n2\n\n\n3\n\n\n2\n\n\n2\n\n\n1\n\n\n1\n\n\n\n\n\n\nAAAAAT\n\n\n8\n\n\n28\n\n\n29\n\n\n34\n\n\n44\n\n\n34\n\n\n33\n\n\n65\n\n\n28\n\n\n58\n\n\n\n\n\n\nAAAACA\n\n\n0\n\n\n2\n\n\n5\n\n\n4\n\n\n4\n\n\n3\n\n\n4\n\n\n6\n\n\n3\n\n\n3\n\n\n\n\n\n\nAAAACC\n\n\n2\n\n\n8\n\n\n4\n\n\n1\n\n\n25\n\n\n2\n\n\n9\n\n\n21\n\n\n15\n\n\n143\n\n\n\n\n\n\nAAAACG\n\n\n1\n\n\n2\n\n\n2\n\n\n0\n\n\n0\n\n\n1\n\n\n2\n\n\n0\n\n\n2\n\n\n2\n\n\n\n\n\n\nAAAACT\n\n\n0\n\n\n2\n\n\n1\n\n\n2\n\n\n4\n\n\n3\n\n\n0\n\n\n2\n\n\n3\n\n\n0\n\n\n\n\n\n\nAAAAGA\n\n\n0\n\n\n0\n\n\n0\n\n\n1\n\n\n1\n\n\n2\n\n\n1\n\n\n1\n\n\n1\n\n\n0\n\n\n\n\n\n\nAAAAGC\n\n\n1\n\n\n3\n\n\n1\n\n\n0\n\n\n0\n\n\n1\n\n\n2\n\n\n0\n\n\n3\n\n\n4\n\n\n\n\n\n\nAAAAGG\n\n\n3\n\n\n4\n\n\n7\n\n\n2\n\n\n3\n\n\n3\n\n\n3\n\n\n3\n\n\n7\n\n\n4\n\n\n\n\n\n\nAAAAGT\n\n\n0\n\n\n2\n\n\n2\n\n\n2\n\n\n1\n\n\n0\n\n\n2\n\n\n2\n\n\n3\n\n\n0\n\n\n\n\n\n\nAAAATA\n\n\n6\n\n\n6\n\n\n24\n\n\n11\n\n\n6\n\n\n9\n\n\n18\n\n\n17\n\n\n10\n\n\n29\n\n\n\n\n\n\nAAAATC\n\n\n1\n\n\n0\n\n\n2\n\n\n0\n\n\n2\n\n\n0\n\n\n0\n\n\n3\n\n\n2\n\n\n1\n\n\n\n\n\n\nAAAATG\n\n\n0\n\n\n3\n\n\n0\n\n\n0\n\n\n1\n\n\n2\n\n\n1\n\n\n2\n\n\n3\n\n\n3\n\n\n\n\n\n\nAAAATT\n\n\n9\n\n\n6\n\n\n32\n\n\n28\n\n\n31\n\n\n42\n\n\n32\n\n\n32\n\n\n65\n\n\n27\n\n\n\n\n\n\nAAACAA\n\n\n0\n\n\n1\n\n\n3\n\n\n0\n\n\n6\n\n\n1\n\n\n1\n\n\n3\n\n\n3\n\n\n0\n\n\n\n\n\n\nAAACAC\n\n\n2\n\n\n3\n\n\n1\n\n\n5\n\n\n3\n\n\n4\n\n\n4\n\n\n4\n\n\n2\n\n\n3\n\n\n\n\n\n\nAAACAG\n\n\n5\n\n\n0\n\n\n1\n\n\n4\n\n\n4\n\n\n1\n\n\n3\n\n\n0\n\n\n2\n\n\n1\n\n\n\n\n\n\nAAACAT\n\n\n2\n\n\n1\n\n\n3\n\n\n4\n\n\n1\n\n\n2\n\n\n0\n\n\n0\n\n\n3\n\n\n3\n\n\n\n\n\n\n\n\n7. Overrepresented Kmers\n\n\nThe function generates list of overrepresented kmers with its maximum obs/exp ratio and the position of maximum obs/exp ratio. \n\n\noverkm \n-\noverrep_kmer\n(\ninfile\n,\n7\n,\nnc\n,\nnr\n)\n\n\n\n\n\n\n## [fastqq] File ( 1/1) \n/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz\n   done.\n## [fastq_Klocs] File ( 1/1) \n/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz\n  done.\n\n\n\n\n\nknitr\n::\nkable\n(\nhead\n(\noverkm\n,\nn\n=\n10\n))\n\n\n\n\n\n\n\n\n\n\n\n\nrow\n\n\ncol\n\n\nobsexp_ratio\n\n\nkmer\n\n\n\n\n\n\n\n\n\n\n932\n\n\n1\n\n\n2.205121\n\n\nAATGGAT\n\n\n\n\n\n\n2031\n\n\n1\n\n\n3.711746\n\n\nACTTGTG\n\n\n\n\n\n\n2044\n\n\n1\n\n\n8.020543\n\n\nACTTTGT\n\n\n\n\n\n\n2718\n\n\n1\n\n\n2.547450\n\n\nAGGGCTC\n\n\n\n\n\n\n2719\n\n\n1\n\n\n5.090272\n\n\nAGGGCTG\n\n\n\n\n\n\n2748\n\n\n1\n\n\n4.042500\n\n\nAGGGTGT\n\n\n\n\n\n\n4028\n\n\n1\n\n\n2.321386\n\n\nATTGTGT\n\n\n\n\n\n\n4196\n\n\n1\n\n\n3.028046\n\n\nCAACGAT\n\n\n\n\n\n\n4444\n\n\n1\n\n\n3.862214\n\n\nCACCCGT\n\n\n\n\n\n\n4693\n\n\n1\n\n\n3.909333\n\n\nCAGCCCA\n\n\n\n\n\n\n\n\n8. Overrepresented Sequence\n\n\nTaking in the output generated from \ncal_over_rep_seq\n, function \noverrepresented_sequence\n produce the overrepresented sequence table by selecting the unique sequences that have counts larger than 0.1% of the total reads of the data file. The results would be displayed as table with decreasing order of counts.\n\n\noverrep_seq \n-\n overrep_sequence\n(\ninfile\n,\nnr\n,\nprefix\n=\ntest\n)\n\nknitr\n::\nkable\n(\nhead\n(\noverrep_seq\n,\nn \n=\n \n5\n))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nx\n\n\n\n\n\n\n\n\n\n\nTGGGTGTGAGGAGTTCAGTTATATGTTTGGGATTTTTTAGGTAGTGGGTGTTGAGCTTGAACGCTTTCTTAATTGGTGGCTGCTTTTAGGCCTACTATGG\n\n\n123\n\n\n\n\n\n\nCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCAATAGATATA\n\n\n122\n\n\n\n\n\n\nCACTAGGAAAAAACCTTGTAGAGAGAGTAAAAAATTTAACACCCATAGTAGGCCTAAAAGCAGCCACCAATTAAGAAAGCGTTCAAGCTCAACACCCACT\n\n\n120\n\n\n\n\n\n\nCTAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGC\n\n\n117\n\n\n\n\n\n\nTAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCA\n\n\n116\n\n\n\n\n\n\n\n\nFunction \noverrepresented_plot\n would take the overrepresented sequence table as input and present a density plot of the counts and mark the top 5 overrepresented sequence in red. \n\n\nplot_overrep_seq\n(\noverrep_seq\n,\nFALSE\n)", 
+            "title": "Manual"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#i-pre-processing-of-fastq-files", 
+            "text": "We first install the package from github by using  devtools  Then we specify the path to the FASTQ file and run analysis and visualization functions on it. \nHere, for example, we use a system file with 25,000 reads as an example.   library ( qckitfastq ) \ninfile  -   system.file ( extdata ,   10^5_reads_test.fq.gz ,  package  =   qckitfastq )   To open FASTQ files, we can replace the infile argument with path to the FASTQ file.   #infile  -  Data/10^5_reads_test.fq.gz   For some functions based on  seqTools , we will first process the file through seqTools and then let qckitfastq functions proceed with the analysis.   fseq  -  seqTools :: fastqq ( infile )   ## [fastqq] File ( 1/1)  /home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz    done.", 
+            "title": "I. Pre-processing of FASTQ files"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#ii-metrics-of-fastq-quality-control", 
+            "text": "", 
+            "title": "II. Metrics of FASTQ quality control"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#1-data-dimension", 
+            "text": "dimensions  function obtains the number of reads and number of positions from a  seqTools  processed FASTQ file. The sample file has 25,000 reads and 100 positions. This section allows us to examine whether the sequence length are uniform throughout the entire file. The results from this section can also help with further analysis like  overrepresented_kmer , where dimensionality of data is important for calculation.   nc  -  dimensions ( fseq , positions ) \nnc  ## [1] 100  nr  -  dimensions ( fseq , reads ) \nnr  ## [1] 25000  plot_sequence_length  function generates distribution plot of the length of all reads. The generated plot would show the sequence length of all the sequences throughout the file. The plot is considered an indication of good data quality is all sequences have the same sequence length with no deviations. The following plot shows that all reads in the file have sequence length of 100.   plot_sequence_length ( fseq , writefile = FALSE )", 
+            "title": "1. data dimension"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#2-per-base-quality-score-statistics", 
+            "text": "basic_statistics  function calculates the quality score per sequence statistics including mean, median and quantiles. We will use the result to create a quality score distribution per position plot to present the overall dispersion and concentration of quality score per position of the FASTQ file.     bs  -  basic_stat ( infile , FALSE ) \nknitr :: kable ( head ( bs ))      q01  q25  median  q75  q99      2  32  32  32  32    12  32  32  32  32    27  37  37  37  37    27  37  37  37  37    27  37  37  37  37    27  41  41  41  41     plot_quality_score ( bs , writefile = FALSE )    plot_quality_score  function generates boxplot of quality score distribution per base.In this section, we would like to examine whether certain portion of the sequences have generally low quality score. If a subset of seqences have quality score generally small( 30)", 
+            "title": "2.  per base quality score statistics"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#3-nucleotide-sequence-content", 
+            "text": "sequence_content  calculates the total number of each nucleotide sequence content per sequence throughout the file.   scA  -  sequence_content ( fseq ,  content  =   A , writefile = FALSE ) \nscA  ##   [1] 4351 5341 5995 6262 6624 6689 6689 6637 5974 6183 6569 7783 6789 6164\n##  [15] 6376 6889 6823 6757 7034 7088 7417 6927 6581 7127 6573 6982 6709 6892\n##  [29] 6791 7285 7265 6893 7267 7493 6949 6875 6731 6506 7256 7523 7849 7482\n##  [43] 7341 6960 7460 7543 7214 6863 6693 6785 7275 7677 7336 7381 7891 7620\n##  [57] 7692 7180 7501 6997 7368 7245 7679 7747 7651 7511 7133 7097 7606 7816\n##  [71] 7757 7482 7679 7317 7805 7492 7281 7067 7204 7245 6940 7199 7639 7607\n##  [85] 7945 7660 7274 7624 7398 7333 7885 7767 7407 8121 7647 7807 7778 7692\n##  [99] 7627 8136  plot_sequence_conent  use the  sequence_content  function and plot the percentage of all nucleotide sequence content per position. The plot would be considered an indication of good data quality when the percentage of each nucleotide sequence content is not significantly larger than other nucleotide sequence contents. In this section, we examine whether each nucleotide sequence content are distributed evenly at all bases. The data is problematic if any sequence bias greatly from other sequence content in any subset of sequences.   plot_sequence_content ( fseq , nr , nc )   ## No id variables; using all as measure variables", 
+            "title": "3. nucleotide sequence content"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#4-gc-content", 
+            "text": "Function  GC_content  utilizes the result from the C++_calling function  GC_per_read  and produce the data frame that is more suitable for the plotting purpose as well as for saving to data file for later access. The result is the GC content percentage per read and will be saved in resulting table.   gc_df  -  GC_content ( infile ) \n\nknitr :: kable ( head ( gc_df ))      meanGC      43    37    39    40    42    38     The  plot_GC_content_plot  function takes the input from previous function and generates plot of distribution of GC nucleotide sequence content percentage. The graph would be an indication of good data quality when the  GC percentage concentrated around 30 to 50 and the results do not differ among different bases.   plot_GC_content ( nc , gc_df )", 
+            "title": "4. GC content"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#5-per-read-sequence-quality-score", 
+            "text": "plot_perseq_quality  function extracts the mean quality score per read and generate a histogram of this statistics.It takes the input of the path to the gzipped FASTQ files. It also enables plot saving if set  writefile  to TRUE and input a  prefix  value to customize name of saved file. The histogram would be considered an indication of good data quality when the majority of reads have high quality score(around 30). If a significant portion of read are with low quality score, say less than 20, then data is problematic.   plot_perseq_quality ( infile , writefile = FALSE )", 
+            "title": "5. Per read sequence quality score"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#6-kmers-count-per-base", 
+            "text": "kmer_count  function produces the per position kmer count with given path to the FASTQ file and the kmer length specified.   km  -  Kmer_count ( infile , k = 6 )   ## [fastq_Klocs] File ( 1/1)  /home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz   done.  knitr :: kable ( km [ 1 : 20 , 1 : 10 ])       1  2  3  4  5  6  7  8  9  10      AAAAAA  14  9  44  18  33  42  69  163  41  34    AAAAAC  8  4  1  24  2  9  21  14  142  5    AAAAAG  2  2  0  3  2  3  2  2  1  1    AAAAAT  8  28  29  34  44  34  33  65  28  58    AAAACA  0  2  5  4  4  3  4  6  3  3    AAAACC  2  8  4  1  25  2  9  21  15  143    AAAACG  1  2  2  0  0  1  2  0  2  2    AAAACT  0  2  1  2  4  3  0  2  3  0    AAAAGA  0  0  0  1  1  2  1  1  1  0    AAAAGC  1  3  1  0  0  1  2  0  3  4    AAAAGG  3  4  7  2  3  3  3  3  7  4    AAAAGT  0  2  2  2  1  0  2  2  3  0    AAAATA  6  6  24  11  6  9  18  17  10  29    AAAATC  1  0  2  0  2  0  0  3  2  1    AAAATG  0  3  0  0  1  2  1  2  3  3    AAAATT  9  6  32  28  31  42  32  32  65  27    AAACAA  0  1  3  0  6  1  1  3  3  0    AAACAC  2  3  1  5  3  4  4  4  2  3    AAACAG  5  0  1  4  4  1  3  0  2  1    AAACAT  2  1  3  4  1  2  0  0  3  3", 
+            "title": "6. Kmers count per base"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#7-overrepresented-kmers", 
+            "text": "The function generates list of overrepresented kmers with its maximum obs/exp ratio and the position of maximum obs/exp ratio.   overkm  - overrep_kmer ( infile , 7 , nc , nr )   ## [fastqq] File ( 1/1)  /home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz    done.\n## [fastq_Klocs] File ( 1/1)  /home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz   done.  knitr :: kable ( head ( overkm , n = 10 ))      row  col  obsexp_ratio  kmer      932  1  2.205121  AATGGAT    2031  1  3.711746  ACTTGTG    2044  1  8.020543  ACTTTGT    2718  1  2.547450  AGGGCTC    2719  1  5.090272  AGGGCTG    2748  1  4.042500  AGGGTGT    4028  1  2.321386  ATTGTGT    4196  1  3.028046  CAACGAT    4444  1  3.862214  CACCCGT    4693  1  3.909333  CAGCCCA", 
+            "title": "7. Overrepresented Kmers"
+        }, 
+        {
+            "location": "/vignette-qckitfastq/#8-overrepresented-sequence", 
+            "text": "Taking in the output generated from  cal_over_rep_seq , function  overrepresented_sequence  produce the overrepresented sequence table by selecting the unique sequences that have counts larger than 0.1% of the total reads of the data file. The results would be displayed as table with decreasing order of counts.  overrep_seq  -  overrep_sequence ( infile , nr , prefix = test ) \nknitr :: kable ( head ( overrep_seq , n  =   5 ))       x      TGGGTGTGAGGAGTTCAGTTATATGTTTGGGATTTTTTAGGTAGTGGGTGTTGAGCTTGAACGCTTTCTTAATTGGTGGCTGCTTTTAGGCCTACTATGG  123    CCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCAATAGATATA  122    CACTAGGAAAAAACCTTGTAGAGAGAGTAAAAAATTTAACACCCATAGTAGGCCTAAAAGCAGCCACCAATTAAGAAAGCGTTCAAGCTCAACACCCACT  120    CTAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGC  117    TAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCA  116     Function  overrepresented_plot  would take the overrepresented sequence table as input and present a density plot of the counts and mark the top 5 overrepresented sequence in red.   plot_overrep_seq ( overrep_seq , FALSE )", 
+            "title": "8. Overrepresented Sequence"
+        }, 
+        {
+            "location": "/basic_stat/", 
+            "text": "basic_stat\n: Generate the data frame that includes percentiles of quality score per position\n\n\nDescription\n\n\nGenerate the data frame that includes percentiles of quality score per position\n\n\nUsage\n\n\nbasic_stat\n(\ninfile\n,\n writefile \n=\n \nFALSE\n,\n prefix\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ninfile\n\n\nthe object that is the dataframe of the mean, median and quantiles of the FASTQ file from basic statistics function\n\n\n\n\n\n\nwritefile\n\n\nthe boolean of whether to write output as file\n\n\n\n\n\n\nprefix\n\n\nthe string of customized prefix of write-out file\n\n\n\n\n\n\n\n\nValue\n\n\ntable of quality score statistics\n\n\nAuthor\n\n\nWenyue Xing, wenyue_xing@brown.edu \n\n\nExamples\n\n\n```r \n\n\nbasic_stat(system.file(\"extdata\", \"10^5_reads_test.fq.gz\", package = \"qckitfastq\"),FALSE)\n\n\n```", 
+            "title": "Basic Stat"
+        }, 
+        {
+            "location": "/basic_stat/#basic_stat-generate-the-data-frame-that-includes-percentiles-of-quality-score-per-position", 
+            "text": "", 
+            "title": "basic_stat: Generate the data frame that includes percentiles of quality score per position"
+        }, 
+        {
+            "location": "/basic_stat/#description", 
+            "text": "Generate the data frame that includes percentiles of quality score per position", 
+            "title": "Description"
+        }, 
+        {
+            "location": "/basic_stat/#usage", 
+            "text": "basic_stat ( infile ,  writefile  =   FALSE ,  prefix )", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/basic_stat/#arguments", 
+            "text": "Argument  Description      infile  the object that is the dataframe of the mean, median and quantiles of the FASTQ file from basic statistics function    writefile  the boolean of whether to write output as file    prefix  the string of customized prefix of write-out file", 
+            "title": "Arguments"
+        }, 
+        {
+            "location": "/basic_stat/#value", 
+            "text": "table of quality score statistics", 
+            "title": "Value"
+        }, 
+        {
+            "location": "/basic_stat/#author", 
+            "text": "Wenyue Xing, wenyue_xing@brown.edu", 
+            "title": "Author"
+        }, 
+        {
+            "location": "/basic_stat/#examples", 
+            "text": "```r   basic_stat(system.file(\"extdata\", \"10^5_reads_test.fq.gz\", package = \"qckitfastq\"),FALSE)  ```", 
+            "title": "Examples"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/", 
+            "text": "calc_over_rep_seq\n: calculate Over Rep seqs\n\n\nDescription\n\n\nCalculate sequece counts for each unique sequence and create a table with unique sequences and corresponding counts\n\n\nUsage\n\n\ncalc_over_rep_seq\n(\ninfile\n,\n out_prefix\n,\n min_size \n=\n \n5L\n,\n buffer_size \n=\n \n1000000L\n)\n\n\n\n\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\ninfile\n\n\nA string giving the path for the fastqfile\n\n\n\n\n\n\nout_prefix\n\n\nA string giving the prefix to be used for outputs\n\n\n\n\n\n\nmin_size\n\n\nAn int for thhresholding over representation\n\n\n\n\n\n\nbuffer_size\n\n\nAn int for the number of lines to keep in memory\n\n\n\n\n\n\n\n\nValue\n\n\ncalculate overrepresented sequence count", 
+            "title": "Calc Over Rep Seq"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/#calc_over_rep_seq-calculate-over-rep-seqs", 
+            "text": "", 
+            "title": "calc_over_rep_seq: calculate Over Rep seqs"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/#description", 
+            "text": "Calculate sequece counts for each unique sequence and create a table with unique sequences and corresponding counts", 
+            "title": "Description"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/#usage", 
+            "text": "calc_over_rep_seq ( infile ,  out_prefix ,  min_size  =   5L ,  buffer_size  =   1000000L )", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/#arguments", 
+            "text": "Argument  Description      infile  A string giving the path for the fastqfile    out_prefix  A string giving the prefix to be used for outputs    min_size  An int for thhresholding over representation    buffer_size  An int for the number of lines to keep in memory", 
+            "title": "Arguments"
+        }, 
+        {
+            "location": "/calc_over_rep_seq/#value", 
+            "text": "calculate overrepresented sequence count", 
+            "title": "Value"
+        }
+    ]
+}

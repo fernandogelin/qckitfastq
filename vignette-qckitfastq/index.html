@@ -1,0 +1,1050 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="QCKitFastQ">
+      
+      
+        <link rel="canonical" href="https://fernandogelin.github.io/qckitfastq/vignette-qckitfastq/">
+      
+      
+        <meta name="author" content=""">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.5, mkdocs-material-2.9.4">
+    
+    
+      
+        <title>"using qckitfastq package"</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../styles/dark_mode.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#i-pre-processing-of-fastq-files" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://fernandogelin.github.io/qckitfastq" title="QCKitFastQ" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                QCKitFastQ
+              </span>
+              <span class="md-header-nav__topic">
+                Manual
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/fernandogelin/qckitfastq/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://fernandogelin.github.io/qckitfastq" title="QCKitFastQ" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    QCKitFastQ
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/fernandogelin/qckitfastq/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Manual" class="md-nav__link md-nav__link--active">
+      Manual
+    </a>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../basic_stat/" title="Basic Stat" class="md-nav__link">
+      Basic Stat
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../calc_over_rep_seq/" title="Calc Over Rep Seq" class="md-nav__link">
+      Calc Over Rep Seq
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/fernandogelin/qckitfastq/edit/master/docs/vignette-qckitfastq.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <p>%\VignetteIndexEntry{quality control analysis and visualization using qckitfastq }
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}</p>
+<hr />
+<h1 id="i-pre-processing-of-fastq-files">I. Pre-processing of FASTQ files</h1>
+<p>We first install the package from github by using <code>devtools</code></p>
+<p>Then we specify the path to the FASTQ file and run analysis and visualization functions on it. 
+Here, for example, we use a system file with 25,000 reads as an example. </p>
+<div class="codehilite"><pre><span></span><span class="kn">library</span><span class="p">(</span>qckitfastq<span class="p">)</span>
+infile <span class="o">&lt;-</span> <span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;extdata&quot;</span><span class="p">,</span> <span class="s">&quot;10^5_reads_test.fq.gz&quot;</span><span class="p">,</span> package <span class="o">=</span> <span class="s">&quot;qckitfastq&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To open FASTQ files, we can replace the infile argument with path to the FASTQ file. </p>
+<div class="codehilite"><pre><span></span><span class="c1">#infile &lt;- &quot;Data/10^5_reads_test.fq.gz&quot;</span>
+</pre></div>
+
+
+<p>For some functions based on <code>seqTools</code>, we will first process the file through seqTools and then let qckitfastq functions proceed with the analysis. </p>
+<div class="codehilite"><pre><span></span>fseq <span class="o">&lt;-</span> seqTools<span class="o">::</span>fastqq<span class="p">(</span>infile<span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## [fastqq] File ( 1/1) &#39;/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz&#39;   done.
+</pre></div>
+
+
+<h1 id="ii-metrics-of-fastq-quality-control">II. Metrics of FASTQ quality control</h1>
+<h2 id="1-data-dimension">1. data dimension</h2>
+<p><em>dimensions</em> function obtains the number of reads and number of positions from a <code>seqTools</code> processed FASTQ file. The sample file has 25,000 reads and 100 positions. This section allows us to examine whether the sequence length are uniform throughout the entire file. The results from this section can also help with further analysis like <em>overrepresented_kmer</em>, where dimensionality of data is important for calculation. </p>
+<div class="codehilite"><pre><span></span>nc <span class="o">&lt;-</span> dimensions<span class="p">(</span>fseq<span class="p">,</span><span class="s">&quot;positions&quot;</span><span class="p">)</span>
+nc
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## [1] 100
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>nr <span class="o">&lt;-</span> dimensions<span class="p">(</span>fseq<span class="p">,</span><span class="s">&quot;reads&quot;</span><span class="p">)</span>
+nr
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## [1] 25000
+</pre></div>
+
+
+<p><em>plot_sequence_length</em> function generates distribution plot of the length of all reads. The generated plot would show the sequence length of all the sequences throughout the file. The plot is considered an indication of good data quality is all sequences have the same sequence length with no deviations. The following plot shows that all reads in the file have sequence length of 100. </p>
+<div class="codehilite"><pre><span></span>plot_sequence_length<span class="p">(</span>fseq<span class="p">,</span>writefile<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-6" src="../figure/unnamed-chunk-6-1.png" /></p>
+<h2 id="2-per-base-quality-score-statistics">2.  per base quality score statistics</h2>
+<p><em>basic_statistics</em> function calculates the quality score per sequence statistics including mean, median and quantiles. We will use the result to create a quality score distribution per position plot to present the overall dispersion and concentration of quality score per position of the FASTQ file.   </p>
+<div class="codehilite"><pre><span></span>bs <span class="o">&lt;-</span> basic_stat<span class="p">(</span>infile<span class="p">,</span><span class="kc">FALSE</span><span class="p">)</span>
+knitr<span class="o">::</span>kable<span class="p">(</span><span class="kp">head</span><span class="p">(</span>bs<span class="p">))</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="right">q01</th>
+<th align="right">q25</th>
+<th align="right">median</th>
+<th align="right">q75</th>
+<th align="right">q99</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">2</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+<td align="right">37</td>
+</tr>
+<tr>
+<td align="right">27</td>
+<td align="right">41</td>
+<td align="right">41</td>
+<td align="right">41</td>
+<td align="right">41</td>
+</tr>
+</tbody>
+</table>
+<div class="codehilite"><pre><span></span>plot_quality_score<span class="p">(</span>bs<span class="p">,</span>writefile<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-7" src="../figure/unnamed-chunk-7-1.png" />
+<em>plot_quality_score</em> function generates boxplot of quality score distribution per base.In this section, we would like to examine whether certain portion of the sequences have generally low quality score. If a subset of seqences have quality score generally small(&lt;30) </p>
+<h2 id="3-nucleotide-sequence-content">3. nucleotide sequence content</h2>
+<p><em>sequence_content</em> calculates the total number of each nucleotide sequence content per sequence throughout the file. </p>
+<div class="codehilite"><pre><span></span>scA <span class="o">&lt;-</span> sequence_content<span class="p">(</span>fseq<span class="p">,</span> content <span class="o">=</span> <span class="s">&quot;A&quot;</span><span class="p">,</span>writefile<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+scA
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>##   [1] 4351 5341 5995 6262 6624 6689 6689 6637 5974 6183 6569 7783 6789 6164
+##  [15] 6376 6889 6823 6757 7034 7088 7417 6927 6581 7127 6573 6982 6709 6892
+##  [29] 6791 7285 7265 6893 7267 7493 6949 6875 6731 6506 7256 7523 7849 7482
+##  [43] 7341 6960 7460 7543 7214 6863 6693 6785 7275 7677 7336 7381 7891 7620
+##  [57] 7692 7180 7501 6997 7368 7245 7679 7747 7651 7511 7133 7097 7606 7816
+##  [71] 7757 7482 7679 7317 7805 7492 7281 7067 7204 7245 6940 7199 7639 7607
+##  [85] 7945 7660 7274 7624 7398 7333 7885 7767 7407 8121 7647 7807 7778 7692
+##  [99] 7627 8136
+</pre></div>
+
+
+<p><em>plot_sequence_conent</em> use the <em>sequence_content</em> function and plot the percentage of all nucleotide sequence content per position. The plot would be considered an indication of good data quality when the percentage of each nucleotide sequence content is not significantly larger than other nucleotide sequence contents. In this section, we examine whether each nucleotide sequence content are distributed evenly at all bases. The data is problematic if any sequence bias greatly from other sequence content in any subset of sequences. </p>
+<div class="codehilite"><pre><span></span>plot_sequence_content<span class="p">(</span>fseq<span class="p">,</span>nr<span class="p">,</span>nc<span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## No id variables; using all as measure variables
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-9" src="../figure/unnamed-chunk-9-1.png" /></p>
+<h2 id="4-gc-content">4. GC content</h2>
+<p>Function <em>GC_content</em> utilizes the result from the C++_calling function <em>GC_per_read</em> and produce the data frame that is more suitable for the plotting purpose as well as for saving to data file for later access. The result is the GC content percentage per read and will be saved in resulting table. </p>
+<div class="codehilite"><pre><span></span>gc_df <span class="o">&lt;-</span> GC_content<span class="p">(</span>infile<span class="p">)</span>
+
+knitr<span class="o">::</span>kable<span class="p">(</span><span class="kp">head</span><span class="p">(</span>gc_df<span class="p">))</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="right">meanGC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">43</td>
+</tr>
+<tr>
+<td align="right">37</td>
+</tr>
+<tr>
+<td align="right">39</td>
+</tr>
+<tr>
+<td align="right">40</td>
+</tr>
+<tr>
+<td align="right">42</td>
+</tr>
+<tr>
+<td align="right">38</td>
+</tr>
+</tbody>
+</table>
+<p>The <em>plot_GC_content_plot</em> function takes the input from previous function and generates plot of distribution of GC nucleotide sequence content percentage. The graph would be an indication of good data quality when the  GC percentage concentrated around 30 to 50 and the results do not differ among different bases. </p>
+<div class="codehilite"><pre><span></span>plot_GC_content<span class="p">(</span>nc<span class="p">,</span>gc_df<span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-11" src="../figure/unnamed-chunk-11-1.png" /></p>
+<h2 id="5-per-read-sequence-quality-score">5. Per read sequence quality score</h2>
+<p><em>plot_perseq_quality</em> function extracts the mean quality score per read and generate a histogram of this statistics.It takes the input of the path to the gzipped FASTQ files. It also enables plot saving if set <em>writefile</em> to TRUE and input a <em>prefix</em> value to customize name of saved file. The histogram would be considered an indication of good data quality when the majority of reads have high quality score(around 30). If a significant portion of read are with low quality score, say less than 20, then data is problematic. </p>
+<div class="codehilite"><pre><span></span>plot_perseq_quality<span class="p">(</span>infile<span class="p">,</span>writefile<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-12" src="../figure/unnamed-chunk-12-1.png" /></p>
+<h2 id="6-kmers-count-per-base">6. Kmers count per base</h2>
+<p><em>kmer_count</em> function produces the per position kmer count with given path to the FASTQ file and the kmer length specified. </p>
+<div class="codehilite"><pre><span></span>km <span class="o">&lt;-</span> Kmer_count<span class="p">(</span>infile<span class="p">,</span>k<span class="o">=</span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## [fastq_Klocs] File ( 1/1) &#39;/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz&#39;  done.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>knitr<span class="o">::</span>kable<span class="p">(</span>km<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">])</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+<th align="right">5</th>
+<th align="right">6</th>
+<th align="right">7</th>
+<th align="right">8</th>
+<th align="right">9</th>
+<th align="right">10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">AAAAAA</td>
+<td align="right">14</td>
+<td align="right">9</td>
+<td align="right">44</td>
+<td align="right">18</td>
+<td align="right">33</td>
+<td align="right">42</td>
+<td align="right">69</td>
+<td align="right">163</td>
+<td align="right">41</td>
+<td align="right">34</td>
+</tr>
+<tr>
+<td align="left">AAAAAC</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">24</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">21</td>
+<td align="right">14</td>
+<td align="right">142</td>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="left">AAAAAG</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">AAAAAT</td>
+<td align="right">8</td>
+<td align="right">28</td>
+<td align="right">29</td>
+<td align="right">34</td>
+<td align="right">44</td>
+<td align="right">34</td>
+<td align="right">33</td>
+<td align="right">65</td>
+<td align="right">28</td>
+<td align="right">58</td>
+</tr>
+<tr>
+<td align="left">AAAACA</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="left">AAAACC</td>
+<td align="right">2</td>
+<td align="right">8</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">25</td>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">21</td>
+<td align="right">15</td>
+<td align="right">143</td>
+</tr>
+<tr>
+<td align="left">AAAACG</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="left">AAAACT</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">AAAAGA</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">AAAAGC</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left">AAAAGG</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="left">AAAAGT</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">AAAATA</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">24</td>
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="right">9</td>
+<td align="right">18</td>
+<td align="right">17</td>
+<td align="right">10</td>
+<td align="right">29</td>
+</tr>
+<tr>
+<td align="left">AAAATC</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">AAAATG</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="left">AAAATT</td>
+<td align="right">9</td>
+<td align="right">6</td>
+<td align="right">32</td>
+<td align="right">28</td>
+<td align="right">31</td>
+<td align="right">42</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">65</td>
+<td align="right">27</td>
+</tr>
+<tr>
+<td align="left">AAACAA</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">AAACAC</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="left">AAACAG</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">AAACAT</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-overrepresented-kmers">7. Overrepresented Kmers</h2>
+<p>The function generates list of overrepresented kmers with its maximum obs/exp ratio and the position of maximum obs/exp ratio. </p>
+<div class="codehilite"><pre><span></span>overkm <span class="o">&lt;-</span>overrep_kmer<span class="p">(</span>infile<span class="p">,</span><span class="m">7</span><span class="p">,</span>nc<span class="p">,</span>nr<span class="p">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>## [fastqq] File ( 1/1) &#39;/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz&#39;   done.
+## [fastq_Klocs] File ( 1/1) &#39;/home/travis/miniconda/envs/test-env/lib/R/library/qckitfastq/extdata/10^5_reads_test.fq.gz&#39;  done.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>knitr<span class="o">::</span>kable<span class="p">(</span><span class="kp">head</span><span class="p">(</span>overkm<span class="p">,</span>n<span class="o">=</span><span class="m">10</span><span class="p">))</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="right">row</th>
+<th align="right">col</th>
+<th align="right">obsexp_ratio</th>
+<th align="left">kmer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">932</td>
+<td align="right">1</td>
+<td align="right">2.205121</td>
+<td align="left">AATGGAT</td>
+</tr>
+<tr>
+<td align="right">2031</td>
+<td align="right">1</td>
+<td align="right">3.711746</td>
+<td align="left">ACTTGTG</td>
+</tr>
+<tr>
+<td align="right">2044</td>
+<td align="right">1</td>
+<td align="right">8.020543</td>
+<td align="left">ACTTTGT</td>
+</tr>
+<tr>
+<td align="right">2718</td>
+<td align="right">1</td>
+<td align="right">2.547450</td>
+<td align="left">AGGGCTC</td>
+</tr>
+<tr>
+<td align="right">2719</td>
+<td align="right">1</td>
+<td align="right">5.090272</td>
+<td align="left">AGGGCTG</td>
+</tr>
+<tr>
+<td align="right">2748</td>
+<td align="right">1</td>
+<td align="right">4.042500</td>
+<td align="left">AGGGTGT</td>
+</tr>
+<tr>
+<td align="right">4028</td>
+<td align="right">1</td>
+<td align="right">2.321386</td>
+<td align="left">ATTGTGT</td>
+</tr>
+<tr>
+<td align="right">4196</td>
+<td align="right">1</td>
+<td align="right">3.028046</td>
+<td align="left">CAACGAT</td>
+</tr>
+<tr>
+<td align="right">4444</td>
+<td align="right">1</td>
+<td align="right">3.862214</td>
+<td align="left">CACCCGT</td>
+</tr>
+<tr>
+<td align="right">4693</td>
+<td align="right">1</td>
+<td align="right">3.909333</td>
+<td align="left">CAGCCCA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-overrepresented-sequence">8. Overrepresented Sequence</h2>
+<p>Taking in the output generated from <em>cal_over_rep_seq</em>, function <em>overrepresented_sequence</em> produce the overrepresented sequence table by selecting the unique sequences that have counts larger than 0.1% of the total reads of the data file. The results would be displayed as table with decreasing order of counts.</p>
+<div class="codehilite"><pre><span></span>overrep_seq <span class="o">&lt;-</span> overrep_sequence<span class="p">(</span>infile<span class="p">,</span>nr<span class="p">,</span>prefix<span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+knitr<span class="o">::</span>kable<span class="p">(</span><span class="kp">head</span><span class="p">(</span>overrep_seq<span class="p">,</span>n <span class="o">=</span> <span class="m">5</span><span class="p">))</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">TGGGTGTGAGGAGTTCAGTTATATGTTTGGGATTTTTTAGGTAGTGGGTGTTGAGCTTGAACGCTTTCTTAATTGGTGGCTGCTTTTAGGCCTACTATGG</td>
+<td align="right">123</td>
+</tr>
+<tr>
+<td align="left">CCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCAATAGATATA</td>
+<td align="right">122</td>
+</tr>
+<tr>
+<td align="left">CACTAGGAAAAAACCTTGTAGAGAGAGTAAAAAATTTAACACCCATAGTAGGCCTAAAAGCAGCCACCAATTAAGAAAGCGTTCAAGCTCAACACCCACT</td>
+<td align="right">120</td>
+</tr>
+<tr>
+<td align="left">CTAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGC</td>
+<td align="right">117</td>
+</tr>
+<tr>
+<td align="left">TAAACCTAGCCCCAAACCCACTCCACCTTACTACCAGACAACCTTAGCCAAACCATTTACCCAAATAAAGTATAGGCGATAGAAATTGAAACCTGGCGCA</td>
+<td align="right">116</td>
+</tr>
+</tbody>
+</table>
+<p>Function <em>overrepresented_plot</em> would take the overrepresented sequence table as input and present a density plot of the counts and mark the top 5 overrepresented sequence in red. </p>
+<div class="codehilite"><pre><span></span>plot_overrep_seq<span class="p">(</span>overrep_seq<span class="p">,</span><span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-16" src="../figure/unnamed-chunk-16-1.png" /></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../basic_stat/" title="Basic Stat" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Basic Stat
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.30f6b8b1.js"></script>
+      
+      <script>app.initialize({version:"0.17.5",url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
