@@ -18,7 +18,8 @@ matrix:
       before_script:
         - source activate test-env
       script:
-        - Rscript docs/make.R
+        - mkdir docs
+        - Rscript make.R
         - mkdir docs/styles
         - curl https://gist.githubusercontent.com/fernandogelin/08ecff3387dffc374c4abf06a577ab71/raw/29ad95fcc771ce49ff6cecc56346218a0e929df8/dark_mode.css > docs/styles/dark_mode.css
         - mkdocs build --verbose --clean --strict
