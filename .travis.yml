@@ -1,9 +1,5 @@
 matrix:
   include: #allows to set up tests/deploys in different languages/environments.
-    - stage: test
-      language: julia
-      julia:
-        - 0.6
     - stage: deploy # this block builds and deploys the docs, it's in Python.
       language: python
       install:
@@ -16,10 +12,7 @@ matrix:
         - conda info -a
         - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
         - source activate test-env
-        - conda install mkdocs
-        - conda install mkdocs-material
-        - conda install r-devtools
-        - conda install r-knitr
+        - conda install mkdocs mkdocs-material r-devtools r-knitr
         - Rscript "docs/make.R"
       script:
         - mkdir docs/styles
