@@ -12,7 +12,8 @@ matrix:
         - conda info -a
         - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
         - source activate test-env
-        - conda install mkdocs mkdocs-material r-devtools r-knitr
+        - pip install mkdocs mkdocs-material
+        - conda install r-devtools r-knitr
         - Rscript "docs/make.R"
       script:
         - mkdir docs/styles
