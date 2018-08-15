@@ -1,8 +1,8 @@
 site_name:        QCKitFastQ
 site_author:      August Guang
-repo_url:         https://github.com/fernandogelin/qckitfatq
+repo_url:         https://github.com/fernandogelin/qckitfastq
 site_description: QCKitFastQ
-site_url: https://fernandogelin.github.io/qckitfatq
+site_url: https://fernandogelin.github.io/qckitfastq
 
 theme:
   name: material
