@@ -1,0 +1,29 @@
+matrix: #allows to set up tests/deploys in different languages/environments.
+    - stage: deploy # this block builds and deploys the docs, it's in Python.
+      language: python
+      install:
+        - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+        - bash miniconda.sh -b -p $HOME/miniconda
+        - export PATH="$HOME/miniconda/bin:$PATH"
+        - hash -r
+        - conda config --set always_yes yes --set changeps1 no
+        - conda update -q conda
+        - conda info -a
+        - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
+        - source activate test-env
+        - conda install mkdocs
+        - conda install mkdocs-material
+        - conda install r-devtools
+        - conda install r-knitr
+        - Rscript "docs/make.R"
+      script:
+        - mkdir docs/styles
+        - curl https://gist.githubusercontent.com/fernandogelin/08ecff3387dffc374c4abf06a577ab71/raw/29ad95fcc771ce49ff6cecc56346218a0e929df8/dark_mode.css > docs/styles/dark_mode.css
+        - mkdocs build --verbose --clean --strict
+      deploy:
+       provider: pages
+       skip_cleanup: true
+       github_token: $GITHUB_TOKEN
+       local_dir: site
+       on:
+         branch: master

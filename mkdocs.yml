@@ -1,0 +1,28 @@
+site_name:        QCKitFastQ
+site_author:      August Guang
+repo_url:         https://github.com/compbiocore/qckitfatq
+site_description: QCKitFastQ
+site_url: https://compbiocore.github.io/qckitfatq
+
+theme:
+  name: material
+
+extra_css:
+  - styles/dark_mode.css
+
+markdown_extensions:
+  - extra
+  - tables
+  - fenced_code
+  - admonition
+  - codehilite
+  - footnotes
+
+docs_dir: docs/
+
+pages:
+  - Home: README.md
+  - Manual: vignette-qckitfastq.md
+  - Reference:
+    - Basic Stat: basic_stat.md
+    - Calc Over Rep Seq: calc_over_rep_seq.md

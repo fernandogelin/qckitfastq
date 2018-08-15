@@ -1,5 +1,5 @@
 #' plot the mean quality score per read in histograms
-#' \code{plot_perseq_quality}
+#' `plot_perseq_quality`
 #' @param infile the object that is the path to the file that
 #' @param writefile the object indicating intent to save the plot as pdf file, set default as FALSE
 #' @param prefix the prefix for the output file of the plot
